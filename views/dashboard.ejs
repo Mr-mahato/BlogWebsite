@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <a href="/logout">Logout</a>
-    <%=email%>
+    <link rel="stylesheet" href="navbarStyle.css" />
+  </head>
+  <body>
+    <%- include('navbar' , {role , username})%>
     <h1>Dashboard page</h1>
     <p>Blog are still to come</p>
-</body>
+
+    <script>
+      const drop_down = document.querySelector(".drop-down");
+      const username = document.querySelector(".showUsername");
+      username.addEventListener("click", () => {
+        drop_down.style.display = drop_down.style.display === "none" ? "flex" : "none";
+      });
+    </script>
+  </body>
 </html>

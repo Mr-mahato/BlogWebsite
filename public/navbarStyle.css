@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body,html{
+    height: 100vh;
+    width: 100vw;
+}
+/* General Navbar Styling */
+nav {
+    background-color: #f0f0f0;  /* Light gray background */
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;         /* Centers items vertically */
+    justify-content: space-between; /* Space between logo and links */
+    border-bottom: 1px solid #ddd;  /* Subtle bottom border */
+}
+
+.logo {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;  /* Dark text for contrast */
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    display: inline-block;  
+    margin-left: 20px;
+}
+
+.nav-links  a {
+    text-decoration: none;
+    color: #555;       /* Slightly darker text */
+    transition: color 0.3s ease;  /* Smooth hover effect */
+}
+.nav-links a:hover {
+    color: #bb261c;  /* Example hover color - a shade of blue*/
+}
+.nav-links{
+    position: relative;
+}
+
+.drop-down{
+    display: none;
+    position: absolute;
+    top: 40px;
+    right: 1px;
+    flex-direction: column;
+    gap: 5px;
+}
+.showUsername:hover { 
+    cursor: pointer;
+}
+
+.drop-down a{
+    padding: 10px;
+    background: #9b9797;
+    color: #f0f0f0;
+}

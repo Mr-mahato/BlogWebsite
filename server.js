@@ -1,14 +1,34 @@
 const express = require('express')
 const app = express();
 const session = require('express-session');
+const cors = require('cors');
+const multer = require('multer');
 app.set('view engine', 'ejs');
+app.use(cors());
 
-const fs = require('fs')
+const fs = require('fs');
+
+
+
 app.use(session({
     secret:'cristianoRonaldoCR7',
     resave:false,
     saveUninitialized:false
 }))
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './uploads'); // Replace './uploads/blog-images/' with your desired folder
+    },
+    filename: function (req, file, cb) {
+        // Optionally add a timestamp or unique identifier to avoid overwrites
+        cb(null, file.originalname); 
+    }
+});
+
+const upload = multer({ storage: storage });
+
+
 app.get('/logout' , (req,res)=>{
     req.session.destroy((err)=>{
         if(err) res.send('internal server error');
@@ -18,34 +38,60 @@ app.get('/logout' , (req,res)=>{
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/login.html');
-})
 
-app.get('/signup' , (req,res)=>{
-    res.sendFile(__dirname + '/signup.html');
-})
 const authorAuth = (req,res,next)=>{
-    if(req.session.email && req.session.role === 'author'){
+    if(req.session.email && req.session.role){
         next();
     }
     else res.send('You are not authorized');
 }
 
-app.get('/dashboard' ,authorAuth ,  (req,res)=>{
-    res.render("dashboard" , {email:req.session.email});
-})
-const adminAuth = (req,res,next)=>{
-    if(req.session.email && req.session.role === 'admin'){
-        next();
-    }else{
-        res.send('You are not authorized');
-    }
 
-}
-app.get('/adminDash' ,adminAuth ,  (req,res)=>{
-    res.sendFile(__dirname + '/adminDashboard.html');
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/login.html');
 })
+
+app.get('/admin', authorAuth , (req,res)=>{
+    console.log('you are here in admin page')
+    res.sendFile(__dirname + '/admin.html')
+})
+app.get('/admin_intro.html',(req,res)=>{
+    res.sendFile(__dirname + '/admin_intro.html')
+})
+app.get('/create_blog.html',authorAuth , (req,res)=>{
+    res.sendFile(__dirname + '/create_blog.html')
+})
+
+
+app.post('/create-blog' , authorAuth , upload.single('blogImage') ,  (req,res)=>{
+    const {blogName , blogContent }  = req.body;
+    console.log(blogName , blogContent);
+    const obj = {
+        blogName,
+        blogContent,
+        blogImage:req.file.path,
+        creator:req.session.usernamef
+    }
+    fs.readFile('blog.json' , 'utf-8' , (err,data)=>{
+        if(err) res.send('inter nal error occur');
+        data = JSON.parse(data);
+        data.push(obj);
+        fs.writeFile('blog.json' , JSON.stringify(data) , (err)=>{
+            if(err) res.send('internal server error');
+            res.redirect('/admin');
+        })
+    })
+})
+app.get('/signup' , (req,res)=>{
+    res.sendFile(__dirname + '/signup.html');
+})
+
+
+app.get('/dashboard' ,authorAuth ,  (req,res)=>{
+    res.render("dashboard" , {role:req.session.role , username:req.session.username});
+})
+
+
 
 
 app.post('/signup' , (req,res)=>{
@@ -76,8 +122,9 @@ app.post('/login' , (req,res)=>{
         data = JSON.parse(data);
         const user = data.find(user => user.email === email && user.password === password);
         if(user){
-            req.session.email = email
+            req.session.email = email;
             req.session.role = user.role;
+            req.session.username = user.username;
             res.redirect('/dashboard');
         }else{
             res.send('Invalid email or password');

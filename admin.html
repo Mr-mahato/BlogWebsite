@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="admin.css" />
+    <script>
+      function loadPage(page) {
+        console.log(page);
+        fetch(page)
+          .then((response) => response.text())
+          .then((data) => {
+            document.querySelector(".aside-right").innerHTML = data;
+          });
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome back admin</h1>
+    </header>
+    <main>
+      <aside>
+        <ul>
+          <a href="#" onclick="loadPage('admin_intro.html'); return false;">
+            <li>Intro to Admin</li>
+          </a>
+          <a href="#" onclick="loadPage('create_blog.html'); return false;">
+            <li>Create Blog</li>
+          </a>
+          <a href="#" onclick="loadPage('create_author.html'); return false;">
+            <li>Create Author</li>
+          </a>
+          <a href="#" onclick="loadPage('handle_author.html'); return false;">
+            <li>Handle Author</li>
+          </a>
+        </ul>
+      </aside>
+      <div class="aside-right"></div>
+    </main>
+  </body>
+</html>
