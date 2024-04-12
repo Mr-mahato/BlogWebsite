@@ -18,7 +18,7 @@ app.use(session({
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads'); // Replace './uploads/blog-images/' with your desired folder
+        cb(null, 'public/uploads'); // Replace './uploads/blog-images/' with your desired folder
     },
     filename: function (req, file, cb) {
         // Optionally add a timestamp or unique identifier to avoid overwrites
@@ -35,7 +35,12 @@ app.get('/logout' , (req,res)=>{
         res.redirect('/');
     })
 })
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(__dirname + '/public/uploads'));
+
+
+
 app.use(express.urlencoded({ extended: true }));
 
 
@@ -88,7 +93,13 @@ app.get('/signup' , (req,res)=>{
 
 
 app.get('/dashboard' ,authorAuth ,  (req,res)=>{
-    res.render("dashboard" , {role:req.session.role , username:req.session.username});
+
+    let blogData = [];
+    fs.readFile('blog.json' , 'utf-8' , (err,data)=>{
+        if(err) res.send('internal server error');
+        blogData = JSON.parse(data);
+        res.render("dashboard" , {role:req.session.role , username:req.session.username , blogData} );
+    })
 })
 
 

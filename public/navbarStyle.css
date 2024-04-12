@@ -62,3 +62,25 @@ nav {
     background: #9b9797;
     color: #f0f0f0;
 }
+
+/* blog */
+.blog {
+    width: 80%;
+    margin: 0 auto;
+    display: flex; /* Activate flexbox layout */
+    align-items: center; /* Vertically center the content */
+    gap: 15px; /* Add a space between image and title */
+    margin-bottom: 20px; /* Add space between blog items */
+    box-sizing: border-box;
+    padding: 10px;
+    justify-content: space-around;
+    box-shadow: 0.02px 0.3px 1px black;
+}
+  
+  .blog img {
+    max-width: 150px; /* Adjust image size as needed */
+    height: auto;  /* Maintain aspect ratio */
+    border-radius: 5px;  /* Add a slight border radius for a softer look */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+  }
+  
