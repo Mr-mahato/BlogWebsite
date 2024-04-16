@@ -5,19 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="admin.css" />
+
     <script>
+
       function loadPage(page) {
-        console.log(page);
         fetch(page)
           .then((response) => response.text())
           .then((data) => {
             document.querySelector(".aside-right").innerHTML = data;
           });
       }
+
+      const handelEdit = (email) => {
+        console.log(email);
+      };
+      const handelDelete = (email) => {
+        fetch(`/author/${email}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if(data.success)
+            {
+              alert(`Author Delete`);
+              location.reload();
+            }
+            else {
+              alert(`Author Not Found`);
+            }
+          })
+          .catch(err=>
+        console.log(err)
+      )
+      };
+
     </script>
+
+
   </head>
   <body>
     <header>
+      <a href="/dashboard" style="text-decoration: none ; color:white; ">Xblog</a>
       <h1>Welcome back admin</h1>
     </header>
     <main>

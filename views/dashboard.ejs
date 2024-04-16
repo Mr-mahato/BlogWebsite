@@ -10,20 +10,21 @@
     <%- include('navbar' , {role , username})%>
     <h1>Dashboard page</h1>
 
-    <% blogData[0].blogImage %>
+    
+    <% if (blogData.length != 0) { %>
+      
+      <% blogData[0].blogImage %>
+      <% blogData.forEach(function(user){ %>
+        <div class="blog">
+          <h2><%= user.blogName %></h2>
+          <img src="/<%= user.blogImage %>" alt="this is image">
+        </div>
+      <% }) %>
 
-    <% blogData.forEach(function(user){ %>
-      <div class="blog">
-        <h2><%= user.blogName %></h2>
-        <img src="/<%= user.blogImage %>" alt="this is image">
-      </div>
-    <% }) %>
-    uploads/target.png
+    <% } %>
+    
+    
 
-    uploads/iphone.png
-    <p>
-      <%= blogData[0].blogImage %>
-    </p>
 
     <script>
       const drop_down = document.querySelector(".drop-down");

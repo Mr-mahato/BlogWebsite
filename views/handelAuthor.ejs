@@ -1,0 +1,16 @@
+
+
+<div class="handelAuthor">
+    <% authorOnly.forEach((user)=>{ %>
+        <div class="authorInfo">
+            <div>
+                <p><%= user.username %></p>
+                <p><%= user.email %></p>
+            </div>
+            <div>
+                <button onclick="handelEdit('<%= user.email %>')">Edit</button>
+                <button onclick="handelDelete('<%= user.email %>')" >Delete</button>
+            </div>
+        </div>
+      <% }); %>
+</div>

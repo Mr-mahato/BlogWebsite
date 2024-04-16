@@ -58,7 +58,7 @@ section{
    width: 70%;
    margin: 0 auto;
 }
-input[type="text"], textarea , input[type='file'] {
+input[type="text"], textarea , input[type='file'] , input[type='password'] , input[type='email'] {
     width: 100%;
     padding: 12px;
     margin: 8px 0;         /* Space above and below inputs */
@@ -87,4 +87,80 @@ button[type="submit"]:hover {
     width: 70%;
     height: 20px;
     border: 1px solid green;
+}
+
+ /* adminINtro */
+ .adminIntro {
+    font-family: Arial, sans-serif; /* Choose your desired font */
+    padding: 20px;                  /* Add spacing around content */
+    margin: 30px auto;  
+    display: flex;            /* Center the div with some margin */
+    max-width: 600px;               /* Limit width for readability */
+    border: 1px solid #ccc;         /* Optional subtle border */
+    border-radius: 5px;             /* Optional rounded corners */
+    background-color: #f8f8f8;      /* Light background for contrast */
+}
+
+/* Styling the heading */
+.adminIntro h1 {
+    color: #333;                /* Darker heading color */
+    text-align: center;
+    margin-bottom: 15px;        /* Space below the heading */
+}
+
+/* Styling the paragraphs */
+.adminIntro p {
+    line-height: 1.5;           /* Increase spacing between lines  */
+    margin-bottom: 10px;        /* Space between paragraphs */
+} 
+.adminIntro > div:last-child {  /* Target the last nested div */
+    margin-left: auto;
+    margin-top: auto;              /* Push it to the right automatically */
+    background: gray;
+    width: 15%;
+    text-align: center;
+    border-radius: 20px;
+    padding:0 10px;
+}
+.AuthorCreate{
+    width: 50%;
+    margin: 0 auto;
+}
+/* Overall Container */
+.handelAuthor { 
+    width: 60%;                 /* Set width to 60% of parent */
+    margin: 30px auto;          /* Center horizontally */
+    padding: 20px;              /* Internal spacing */
+    border: 1px solid #ddd;     /* Optional border */
+}
+
+/* Individual Author Info */
+.authorInfo {
+    display: flex;              /* Enable flexbox for easy arrangement */
+    align-items: center;        /* Vertically center content */
+    justify-content: space-between; /* Space between left and right */
+    margin-bottom: 15px;        /* Space between each author */    
+    border-bottom: 1px solid #eee;   /* Optional divider line */
+    padding-bottom: 10px;            /* Padding below divider */
+}
+
+
+
+/* Right Side (Links) */
+.authorInfo > div:last-child {
+    margin-left: 60px;          /* Space between info and links */
+}
+
+.authorInfo button {
+    border:none;    /* Remove default underline */
+    color: #333;                /* Dark link color */
+    background-color: #f0f0f0;  /* Light background */
+    padding: 8px 14px;          /* Button-like padding */
+    border-radius: 3px;         /* Slightly rounded corners */
+    margin-right: 5px; 
+    cursor: pointer; 
+    font-size: 16px;
+} 
+.authorInfo > div:last-child button:nth-child(2):hover { 
+    background: rgb(214, 81, 81);
 }

@@ -1,1 +1,14 @@
-[{"username":"chandu","email":"cm@gmail.com","password":"1234","role":"author"},{"username":"tm","email":"tm@gmail.com","password":"4321","role":"admin"},{"username":"Chandu","email":"","password":"","role":"author"}]
+[
+  {
+    "username": "tm",
+    "email": "tm@gmail.com",
+    "password": "4321",
+    "role": "admin"
+  },
+  {
+    "username": "jin",
+    "email": "jin@gmail.com",
+    "password": "1234",
+    "role": "author"
+  }
+]
